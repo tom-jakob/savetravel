@@ -9,13 +9,14 @@ import { TravelWarningObject } from '../Models/TravelWarningObject';
 })
 export class AllTravelWarningsComponent implements OnInit {
 
-travelWarningObject: TravelWarningObject;
-
+travelWarningObject_old: TravelWarningObject;
+travelWarningObject = new TravelWarningObject;
 
   constructor(private countryDataService: CountryDataServiceService) { }
 
   ngOnInit(): void {
-    this.countryDataService.getAllTWs().subscribe(fetchedTWO => (this.travelWarningObject = fetchedTWO));
+    this.countryDataService.getAllTWs().subscribe(fetchedTWO => 
+      (this.travelWarningObject = fetchedTWO));
   }
 
 }

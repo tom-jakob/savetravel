@@ -9,24 +9,29 @@
 
 <body>
 
-<table>
+<table border="1">
 
 <thead>
     <tr>
 <th>Country</th>
 <th>Code</th>
 <th>Message</th>
-    </tr>
-    <tr *ngFor let value of TravelWarningObject.data.values()>
+</tr>
+</thead>
+    
+
+    <tr *ngFor = "let value of travelWarningObject.data | keyvalue">
         <td>{{value.name}}</td>
         <td>{{value.iso_alpha2}}</td>
         <td>{{value.advisory.message}}</td>
     </tr>
-</thead>
 
+ 
 </table>
 
 
+
+{{travelWarningObject | json }}
 
 
 </body>
