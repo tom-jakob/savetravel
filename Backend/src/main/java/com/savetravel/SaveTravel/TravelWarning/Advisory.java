@@ -1,8 +1,8 @@
 package com.savetravel.SaveTravel.TravelWarning;
 
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+
+
 public class Advisory {
 
 	private double score;
@@ -11,7 +11,9 @@ public class Advisory {
 	private String updated;
 	private String source;
 	
-	
+	public Advisory() {
+		
+	}
 	
 	public Advisory(double score, int sources_active, String message, String updated, String source) {
 		super();

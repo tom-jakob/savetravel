@@ -1,12 +1,6 @@
 package com.savetravel.SaveTravel.TravelWarning;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@NoArgsConstructor
-@Getter
-@Setter
 public class Reply {
 
 	private String cache;
@@ -15,6 +9,10 @@ public class Reply {
 	private String note;
 	private int count;
 	
+	
+	public Reply() {
+		
+	}
 	
 	public Reply(String cache, int code, String status, String note, int count) {
 		super();

@@ -2,15 +2,12 @@ package com.savetravel.SaveTravel.TravelWarning;
 
 import java.util.HashMap;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@NoArgsConstructor
-@Getter
-@Setter
 public class Data {
 
+	public Data() {
+		
+	}
 
 	private HashMap<String, CountryCode> data;
 	
