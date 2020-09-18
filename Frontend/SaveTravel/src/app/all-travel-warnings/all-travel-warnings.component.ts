@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryDataServiceService } from '../service/country-data-service.service';
 import { TravelWarningObject } from '../Models/TravelWarningObject';
+import { CountryCode } from '../Models/CountryCode';
 
 @Component({
   selector: 'app-all-travel-warnings',
@@ -9,14 +10,15 @@ import { TravelWarningObject } from '../Models/TravelWarningObject';
 })
 export class AllTravelWarningsComponent implements OnInit {
 
-travelWarningObject_old: TravelWarningObject;
 travelWarningObject = new TravelWarningObject;
+countryCodeMap = new Map<string, CountryCode>();
 
   constructor(private countryDataService: CountryDataServiceService) { }
 
   ngOnInit(): void {
-    this.countryDataService.getAllTWs().subscribe(fetchedTWO => 
-      (this.travelWarningObject = fetchedTWO));
+
+    this.countryDataService.getAllTWs().subscribe(fetchedTWO => (this.travelWarningObject = fetchedTWO));
+           
   }
 
 }

@@ -15,24 +15,25 @@
     <tr>
 <th>Country</th>
 <th>Code</th>
-<th>Message</th>
+<th>Name</th>
 </tr>
 </thead>
-    
-
-    <tr *ngFor = "let value of travelWarningObject.data | keyvalue">
-        <td>{{value.name}}</td>
-        <td>{{value.iso_alpha2}}</td>
-        <td>{{value.advisory.message}}</td>
-    </tr>
-
- 
+    <tbody>
+    <tr *ngFor = "let item of travelWarningObject.data | keyvalue">
+            <td>{{item.key}}</td>
+            <td>{{item.value.iso_alpha2}}</td>
+            <td>{{item.value.name}}</td>
+        </tr>
+</tbody>
 </table>
 
 
-
-{{travelWarningObject | json }}
-
+<!-- {{travelWarningObject | json }}
+<br />
+--------
+<br />
+{{travelWarningObject.data | json }}
+<br /> -->
 
 </body>
 </html>

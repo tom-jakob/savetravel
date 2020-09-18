@@ -1,0 +1,46 @@
+
+
+
+<div class="container">
+    <h2>Chose a Country</h2>
+     <form>
+      <div class="form-group">
+        <label for="sel1">Select Country:</label>
+        <select class="form-control" id="sel1" 
+        (change)="showCountryDetails($event.target.value)"  >
+       
+            <option 
+            *ngFor = "let item of countryList.countryid | keyvalue"
+            [value]="item.value">
+            {{item.key}}
+        </option>
+            
+        </select>
+     
+      </div>
+    </form>
+
+<div *ngIf="toggleShowDetails" style="float:center">
+<table border=0.5>
+
+<tr *ngFor = "let item of travelWarningObject.data | keyvalue">
+    <th>Country</th>
+    <td>{{item.value.name}}</td>
+</tr>
+<tr *ngFor = "let item of travelWarningObject.data | keyvalue">
+    <th>Danger</th>
+    <td>{{item.value.advisory.score}}</td>
+  </tr>
+  <tr *ngFor = "let item of travelWarningObject.data | keyvalue">
+    <th>Last Update</th>
+    <td>{{item.value.advisory.updated}}</td>
+</tr>
+    
+    
+    
+
+</table>
+</div>
+
+</div>
+

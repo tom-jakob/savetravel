@@ -14,9 +14,13 @@ rootApiPath:string = "http://localhost:8080/gettravelwarnings"
 
 
 public getAllTWs(): Observable<TravelWarningObject> {
-return this.http.get<TravelWarningObject>(this.rootApiPath);
+return this.http.get<TravelWarningObject>(this.rootApiPath + "/alltw");
 
 }
 
+public getSingleTW(coco:string):Observable<TravelWarningObject> {
+
+  return this.http.get<TravelWarningObject>(this.rootApiPath + "/onetw/?coco=" + coco);
+}
 
 }

@@ -4,6 +4,6 @@ import { CountryCode } from './CountryCode';
 export class TravelWarningObject {
 
 api_status:Api_status;
-data:Map<String,CountryCode>;
+data:Map<string,CountryCode>;
 
 }
