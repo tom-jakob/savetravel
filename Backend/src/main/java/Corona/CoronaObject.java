@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CountryCoronaOuter {
+public class CoronaObject {
 
 	ArrayList<CountryCoronaInner> countrydata;
 	
