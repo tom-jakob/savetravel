@@ -2,6 +2,8 @@ package com.savetravel.SaveTravel;
 
 import java.text.DecimalFormat;
 import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 public class TravelWarningController {
 
     AllInfoObject allInfoObject = new AllInfoObject();
-    CoronaObject coronaObject = new CoronaObject();
-    Double coronaActiveCases = new Double(0);
+    Double coronaActiveCases = new Double(0.0);
     boolean cocoExistsInCorona = false;
 
     @Autowired
@@ -45,7 +46,7 @@ public class TravelWarningController {
         	
         	if (entry.getKey().equals(coco)) {
         		allInfoObject.setCountryName(entry.getValue().getName());
-        		allInfoObject.setCountryCode(entry.getValue().getIso_alpha_2());
+        		allInfoObject.setCountryCode(coco);
         		allInfoObject.setLastUpdateTW(entry.getValue().getAdvisory().getUpdated());
         		allInfoObject.setTravelWarningScore(entry.getValue().getAdvisory().getScore());
         	}
@@ -55,37 +56,44 @@ public class TravelWarningController {
         
 
         try {
+        	
+        	Optional<CoronaObject> coronaObject = apiService.getCoronaByCountry(coco);
 
-            coronaObject = apiService.getCoronaByCountry(coco);
+            if (coronaObject.isPresent()) {
 
-            for (CountryCoronaInner countryCoronaInner : coronaObject.getCountrydata()) {
-
-                coronaActiveCases = (countryCoronaInner.getTotal_cases() - countryCoronaInner.getTotal_recovered());
-                allInfoObject.setCoronaActiveCases(coronaActiveCases);
-
-                cocoExistsInCorona = true;
-            }
-
-        } catch (Exception e) {
-            coronaActiveCases =  null;
+                for (CountryCoronaInner countryCoronaInner : coronaObject.get().getCountrydata()) {
+                    coronaActiveCases = (countryCoronaInner.getTotal_cases() - countryCoronaInner.getTotal_recovered());
+                    allInfoObject.setCoronaActiveCases(coronaActiveCases);
+                    cocoExistsInCorona = true;
+                }
+            } 
+                    
+            } catch (Exception e) {
+//          coronaActiveCases = 0.0;
+            	cocoExistsInCorona = false;
+            System.out.println("Country Code " + coco.toString() + " does not exist in Corona database!");
 
         }
 
         AllBasicCountryData allBasicCountryData = new AllBasicCountryData();
         allBasicCountryData = apiService.getACDfromAPIService(coco);
 
-        if (cocoExistsInCorona) {
+        System.out.println(cocoExistsInCorona + " = value of cocoExistsInCorona");
+        
+        if (!cocoExistsInCorona) {
 
+        	 allInfoObject.setCoronaByPopulation(null);
+             allInfoObject.setCoronaActiveCases(null);
+
+        } else {
+
+     
             Double coronaPopulationRatio = (coronaActiveCases / allBasicCountryData.getPopulation());
 
             DecimalFormat df = new DecimalFormat("0.000");
             String coronaPopulationRatioRounded = df.format(coronaPopulationRatio);
 
             allInfoObject.setCoronaByPopulation(coronaPopulationRatioRounded);
-
-        } else {
-
-            allInfoObject.setCoronaByPopulation(null);
 
         }
 

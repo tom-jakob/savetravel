@@ -1,46 +1,49 @@
-
-
-
 <div class="container">
-    <h2>Chose a Country</h2>
-     <form>
-      <div class="form-group">
-        <label for="sel1">Select Country:</label>
-        <select class="form-control" id="sel1" 
-        (change)="showCountryDetails($event.target.value)"  >
-       
-            <option 
-            *ngFor = "let item of countryList.countryid | keyvalue"
-            [value]="item.value">
-            {{item.key}}
+  <h2>Chose a Country</h2>
+  <form>
+    <div class="form-group">
+      <label for="sel1">Select Country:</label>
+      <select class="form-control" id="sel1" (change)="showCountryDetails($event.target.value)">
+
+        <option *ngFor="let item of countryList.countryid | keyvalue" [value]="item.value">
+          {{item.key}}
         </option>
-            
-        </select>
-     
-      </div>
-    </form>
 
-<div *ngIf="toggleShowDetails" style="float:center">
-<table border=0.5>
+      </select>
 
-<tr *ngFor = "let item of travelWarningObject.data | keyvalue">
-    <th>Country</th>
-    <td>{{item.value.name}}</td>
-</tr>
-<tr *ngFor = "let item of travelWarningObject.data | keyvalue">
-    <th>Danger</th>
-    <td>{{item.value.advisory.score}}</td>
-  </tr>
-  <tr *ngFor = "let item of travelWarningObject.data | keyvalue">
-    <th>Last Update</th>
-    <td>{{item.value.advisory.updated}}</td>
-</tr>
-    
-    
-    
+    </div>
+  </form>
 
-</table>
+
+  <div *ngIf="toggleShowDetails" style="float:center">
+    <table border=0.5>
+
+      <tr>
+        <th>Country</th>
+        <td>{{allInfoObject.countryName}}</td>
+      </tr>
+      <tr>
+        <th>Travel Warning Score</th>
+        <td>{{allInfoObject.travelWarningScore}}</td>
+      </tr>
+      <tr>
+        <th>Last Updated</th>
+        <td>{{allInfoObject.lastUpdateTW}}</td>
+      </tr>
+      <tr>
+        <th>Active Corona Cases</th>
+        <td *ngIf="allInfoObject.coronaActiveCases">{{allInfoObject.coronaActiveCases}}</td>
+        <td *ngIf="!allInfoObject.coronaActiveCases">Not Available</td>
+      </tr>
+      <tr>
+        <th>Corona-Population-Ratio</th>
+        <td  *ngIf="allInfoObject.coronaByPopulation">{{allInfoObject.coronaByPopulation}} %</td>
+        <td  *ngIf="!allInfoObject.coronaByPopulation">Not Available</td>
+
+      </tr>
+    </table>
+
+
+  </div>
+
 </div>
-
-</div>
-

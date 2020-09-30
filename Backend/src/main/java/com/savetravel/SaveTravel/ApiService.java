@@ -1,6 +1,7 @@
 package com.savetravel.SaveTravel;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -33,25 +34,45 @@ public class ApiService {
 
 	}
 
-	public CoronaObject getCoronaByCountry(String coco) {
+//	public CoronaObject getCoronaByCountry(String coco) {
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		headers.add("user-agent",
+//				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+//		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+//
+//		RestTemplate restTemplate = new RestTemplate();
+//		CoronaObject coronaCases = new CoronaObject();
+//
+//		ResponseEntity<CoronaObject> responseEntity = restTemplate.exchange(
+//				"https://api.thevirustracker.com/free-api?countryTotal=" + coco.toUpperCase(), HttpMethod.GET, entity,
+//				CoronaObject.class);
+//		coronaCases = responseEntity.getBody();
+//
+//		return coronaCases;
+//
+//	}
+	
+	public Optional<CoronaObject> getCoronaByCountry(String coco) {
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		headers.add("user-agent",
-				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.add("user-agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-		RestTemplate restTemplate = new RestTemplate();
-		CoronaObject coronaCases = new CoronaObject();
+        RestTemplate restTemplate = new RestTemplate();
+        Optional<CoronaObject> coronaCases;
 
-		ResponseEntity<CoronaObject> responseEntity = restTemplate.exchange(
-				"https://api.thevirustracker.com/free-api?countryTotal=" + coco.toUpperCase(), HttpMethod.GET, entity,
-				CoronaObject.class);
-		coronaCases = responseEntity.getBody();
+        ResponseEntity<CoronaObject> responseEntity = restTemplate.exchange(
+                "https://api.thevirustracker.com/free-api?countryTotal=" + coco.toUpperCase(), HttpMethod.GET, entity,
+                CoronaObject.class);
+        coronaCases = Optional.ofNullable(responseEntity.getBody());
 
-		return coronaCases;
+        return coronaCases;
 
-	}
+    }
 
 	public AllBasicCountryData getACDfromAPIService(String coco) {
 
