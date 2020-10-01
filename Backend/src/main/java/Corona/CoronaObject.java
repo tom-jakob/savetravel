@@ -2,6 +2,7 @@ package Corona;
 
 import java.util.ArrayList;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,6 @@ import lombok.Setter;
 public class CoronaObject {
 
 	ArrayList<CountryCoronaInner> countrydata;
-	
+	Boolean cocoExistsInCorona = false;
 	
 }
