@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CountryCoronaInner {
 	
+
 	private Info info;
 	private Double total_cases;
 	private Double total_recovered;
@@ -21,6 +22,7 @@ public class CountryCoronaInner {
     private int total_active_cases;
     private long total_serious_cases;
     private int total_danger_rank;
+
 
          
      

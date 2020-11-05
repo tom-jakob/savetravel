@@ -1,6 +1,5 @@
-package Corona;
+package com.savetravel.SaveTravel.AllBasicCountryData;
 
-import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CoronaObject {
+public class AltSpellings {
 
-	ArrayList<CountryCoronaInner> countrydata;
-	String stat;
-	Boolean cocoExistsInCorona = false;
-
+	String altSpellings;
 	
 }

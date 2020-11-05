@@ -1,46 +1,91 @@
-
-
-
 <div class="container">
-    <h2>Chose a Country</h2>
-     <form>
-      <div class="form-group">
-        <label for="sel1">Select Country:</label>
-        <select class="form-control" id="sel1" 
-        (change)="showCountryDetails($event.target.value)"  >
-       
-            <option 
-            *ngFor = "let item of countryList.countryid | keyvalue"
-            [value]="item.value">
-            {{item.key}}
+  <h2>Chose a Country</h2>
+  <form>
+    <div class="form-group">
+      <label for="sel1">Select Country:</label>
+      <select class="form-control" id="sel1" (change)="showCountryDetails($event.target.value)">
+
+        <option *ngFor="let item of countryList.countryid | keyvalue" [value]="item.value">
+          {{item.key}}
         </option>
-            
-        </select>
-     
-      </div>
-    </form>
 
-<div *ngIf="toggleShowDetails" style="float:center">
-<table border=0.5>
+      </select>
 
-<tr *ngFor = "let item of travelWarningObject.data | keyvalue">
-    <th>Country</th>
-    <td>{{item.value.name}}</td>
+    </div>
+  </form>
+
+
+  <div *ngIf="toggleShowDetails" style="float:center">
+    <table border=0.5>
+
+      <tr>
+        <th>Country</th>
+        <td>{{allInfoObject.countryName}}</td>
+      </tr>
+      <tr>
+        <th>Travel Warning Score</th>
+        <td>{{allInfoObject.travelWarningScore}}</td>
+      </tr>
+      <tr>
+        <th>Last Updated</th>
+        <td>{{allInfoObject.lastUpdateTW}}</td>
+      </tr>
+      <tr *ngIf="allInfoObject.cocoExistsInCorona">
+        <th>Active Corona Cases</th>
+        <td >{{allInfoObject.coronaActiveCases}}</td>
+     </tr>
+      <tr *ngIf="allInfoObject.cocoExistsInCorona">
+        <th>Corona-Population-Ratio</th>
+        <td>{{allInfoObject.coronaByPopulation}} %</td>
+      </tr>
+      <tr *ngIf="!allInfoObject.cocoExistsInCorona">
+        <th>CoVid19 Stats</th>
+        <td><i>No official number of Corona cases available</i></td>
+      </tr>
+    </table>
+
+    <button type="button" (click)=saveAllInfoObject()>Save Country</button>
+
+  </div>
+
+<div *ngIf="travelRoute?.length > 0">
+<br />
+<br />
+<h3>My Travel Route</h3>
+<table width="100%" border="1px">
+<tr>
+  <th>Country</th>
+  <th>Warning Level</th>
 </tr>
-<tr *ngFor = "let item of travelWarningObject.data | keyvalue">
-    <th>Danger</th>
-    <td>{{item.value.advisory.score}}</td>
-  </tr>
-  <tr *ngFor = "let item of travelWarningObject.data | keyvalue">
-    <th>Last Update</th>
-    <td>{{item.value.advisory.updated}}</td>
+<tr *ngFor="let item of travelRoute">
+  <td>{{item.countryName}}</td>
+  <td>{{item.travelWarningScore}}</td>
 </tr>
-    
-    
-    
 
 </table>
-</div>
+
+<br />
+<button type="button" (click)=saveTravelRoute()>Save Travel Route</button>
+
 
 </div>
 
+<div>
+  <br />
+  <br />
+  <h3>From Hibernate</h3>
+  <table width="100%" border="1px">
+  <tr>
+    <th>Country</th>
+    <th>Warning Level</th>
+  </tr>
+  <tr *ngFor="let item of usersTravelRoute">
+    <td>{{item.countryName}}</td>
+    <td>{{item.travelWarningScore}}</td>
+  </tr>
+  
+  </table>
+
+{{travelRoute | json}}
+
+</div>
