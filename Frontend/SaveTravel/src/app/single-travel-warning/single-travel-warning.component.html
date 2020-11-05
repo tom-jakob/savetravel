@@ -30,20 +30,62 @@
         <th>Last Updated</th>
         <td>{{allInfoObject.lastUpdateTW}}</td>
       </tr>
-      <tr>
+      <tr *ngIf="allInfoObject.cocoExistsInCorona">
         <th>Active Corona Cases</th>
-        <td *ngIf="allInfoObject.coronaActiveCases">{{allInfoObject.coronaActiveCases}}</td>
-        <td *ngIf="!allInfoObject.coronaActiveCases">Not Available</td>
-      </tr>
-      <tr>
+        <td >{{allInfoObject.coronaActiveCases}}</td>
+     </tr>
+      <tr *ngIf="allInfoObject.cocoExistsInCorona">
         <th>Corona-Population-Ratio</th>
-        <td  *ngIf="allInfoObject.coronaByPopulation">{{allInfoObject.coronaByPopulation}} %</td>
-        <td  *ngIf="!allInfoObject.coronaByPopulation">Not Available</td>
-
+        <td>{{allInfoObject.coronaByPopulation}} %</td>
+      </tr>
+      <tr *ngIf="!allInfoObject.cocoExistsInCorona">
+        <th>CoVid19 Stats</th>
+        <td><i>No official number of Corona cases available</i></td>
       </tr>
     </table>
 
+    <button type="button" (click)=saveAllInfoObject()>Save Country</button>
 
   </div>
+
+<div *ngIf="travelRoute?.length > 0">
+<br />
+<br />
+<h3>My Travel Route</h3>
+<table width="100%" border="1px">
+<tr>
+  <th>Country</th>
+  <th>Warning Level</th>
+</tr>
+<tr *ngFor="let item of travelRoute">
+  <td>{{item.countryName}}</td>
+  <td>{{item.travelWarningScore}}</td>
+</tr>
+
+</table>
+
+<br />
+<button type="button" (click)=saveTravelRoute()>Save Travel Route</button>
+
+
+</div>
+
+<div>
+  <br />
+  <br />
+  <h3>From Hibernate</h3>
+  <table width="100%" border="1px">
+  <tr>
+    <th>Country</th>
+    <th>Warning Level</th>
+  </tr>
+  <tr *ngFor="let item of usersTravelRoute">
+    <td>{{item.countryName}}</td>
+    <td>{{item.travelWarningScore}}</td>
+  </tr>
+  
+  </table>
+
+{{travelRoute | json}}
 
 </div>

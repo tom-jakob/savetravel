@@ -8,13 +8,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CreateTravelListComponent } from './create-travel-list/create-travel-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AllTravelWarningsComponent,
-    SingleTravelWarningComponent
+    SingleTravelWarningComponent,
+    CreateTravelListComponent
   ],
   imports: [
     BrowserModule,
