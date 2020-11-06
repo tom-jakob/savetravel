@@ -21,7 +21,7 @@ export class SingleTravelWarningComponent implements OnInit {
   constructor(private countryDataService: CountryDataServiceService) { }
 
   ngOnInit(): void {
-this.getUsersTravelRoute();
+// this.getUsersTravelRoute();
   }
 
 ngOnChanes(): void {

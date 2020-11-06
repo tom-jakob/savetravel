@@ -1,4 +1,4 @@
-package com.savetravel.SaveTravel;
+package com.savetravel.SaveTravel.Controller;
 
 import java.util.ArrayList;
 import java.util.List;

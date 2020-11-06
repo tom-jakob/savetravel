@@ -1,4 +1,4 @@
-package com.savetravel.SaveTravel;
+package com.savetravel.SaveTravel.Controller;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import Corona.CoronaObject;
 import Corona.CountryCoronaInner;
 
 @Service
-public class APIService {
+public class ApiService {
 
 	public AllInfoObject getTravelWarnings(String coco, AllInfoObject allInfoObject)
 			throws JsonMappingException, JsonProcessingException {
