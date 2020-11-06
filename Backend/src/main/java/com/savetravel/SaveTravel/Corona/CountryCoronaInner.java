@@ -1,4 +1,4 @@
-package Corona;
+package com.savetravel.SaveTravel.Corona;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

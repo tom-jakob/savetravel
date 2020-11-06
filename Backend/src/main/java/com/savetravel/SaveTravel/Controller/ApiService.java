@@ -20,8 +20,8 @@ import com.savetravel.SaveTravel.AllInfoObject.AllInfoObject;
 import com.savetravel.SaveTravel.TravelWarning.CountryCode;
 import com.savetravel.SaveTravel.TravelWarning.TravelWarningObject;
 
-import Corona.CoronaObject;
-import Corona.CountryCoronaInner;
+import com.savetravel.SaveTravel.Corona.CoronaObject;
+import com.savetravel.SaveTravel.Corona.CountryCoronaInner;
 
 @Service
 public class ApiService {

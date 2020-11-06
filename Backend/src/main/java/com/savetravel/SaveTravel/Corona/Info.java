@@ -1,4 +1,4 @@
-package Corona;
+package com.savetravel.SaveTravel.Corona;
 
 
 public class Info {

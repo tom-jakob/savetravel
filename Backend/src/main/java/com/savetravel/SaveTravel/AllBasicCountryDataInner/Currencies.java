@@ -1,4 +1,4 @@
-package AllBasicCountryData;
+package com.savetravel.SaveTravel.AllBasicCountryDataInner;
 
 public class Currencies {
 

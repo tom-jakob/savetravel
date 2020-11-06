@@ -1,4 +1,4 @@
-package AllBasicCountryData;
+package com.savetravel.SaveTravel.AllBasicCountryDataInner;
 
 import java.net.URL;
 import java.util.ArrayList;

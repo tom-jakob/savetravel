@@ -1,4 +1,4 @@
-package Corona;
+package com.savetravel.SaveTravel.Corona;
 
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
