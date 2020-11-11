@@ -6,9 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SingleTravelWarningComponent } from './single-travel-warning/single-travel-warning.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
-import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateTravelListComponent } from './create-travel-list/create-travel-list.component';
+import { LoginComponent } from './login/login.component';
+import { AppService } from './service/app.service';
+import { UserService } from './service/user.service';
+
+
 
 
 @NgModule({
@@ -16,7 +20,8 @@ import { CreateTravelListComponent } from './create-travel-list/create-travel-li
     AppComponent,
     AllTravelWarningsComponent,
     SingleTravelWarningComponent,
-    CreateTravelListComponent
+    CreateTravelListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +29,8 @@ import { CreateTravelListComponent } from './create-travel-list/create-travel-li
     HttpClientModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
+    ],
+  providers: [AppService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

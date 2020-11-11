@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AllInfoObject } from '../Models/AllInfoObject';
 import { CountryID } from '../Models/CountryID';
 import { TravelWarningObject } from '../Models/TravelWarningObject';
+import { AppService } from '../service/app.service';
 import { CountryDataServiceService } from '../service/country-data-service.service';
 
 @Component({
@@ -17,17 +19,21 @@ export class SingleTravelWarningComponent implements OnInit {
   allInfoObject: AllInfoObject = new AllInfoObject;
   travelRoute: AllInfoObject[] = [];
   usersTravelRoute: AllInfoObject[] = [];
+  greeting = {};
 
-  constructor(private countryDataService: CountryDataServiceService) { }
+  constructor(private countryDataService: CountryDataServiceService, private app: AppService, private http: HttpClient) { 
+    http.get('localhost:8080/hello').subscribe(data => this.greeting = data)
+  }
 
   ngOnInit(): void {
-// this.getUsersTravelRoute();
+
   }
 
 ngOnChanes(): void {
  
 }
 
+authenticated() { return this.app.authenticated; }
 
   public showCountryDetails(countryCode: string) {
     this.countryCode = countryCode;

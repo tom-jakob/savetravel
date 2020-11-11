@@ -1,4 +1,4 @@
-package com.savetravel.SaveTravel.Controller;
+package com.savetravel.SaveTravel.Repositories;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
