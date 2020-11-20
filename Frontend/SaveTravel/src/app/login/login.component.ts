@@ -1,61 +1,50 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { AuthService } from '../service/auth.service';
+import { TokenStorageService } from '../service/token-storage.service';
 
-
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AppService } from '../service/app.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    model: any = {};
-    credentials = {username: '', password: ''};
-    error: Boolean = false;
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private http: HttpClient,
-        private app: AppService
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
-    ) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
-    ngOnInit() {
-        sessionStorage.setItem('token', '');
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
     }
-
-    // login() {
-    //     let url = 'http://localhost:8080/login';
-    //     this.http.post<Observable<boolean>>(url, {
-    //         userName: this.model.username,
-    //         password: this.model.password
-    //     }).subscribe(isValid => {
-    //         if (isValid) {
-    //             sessionStorage.setItem(
-    //                 'token',
-    //                 btoa(this.model.username + ':' + this.model.password)
-    //             );
-    //             this.router.navigate(['savetravel']);
-    //         } else {
-    //             alert("Authentication failed.")
-    //         }
-    //     });
-    // }
-
-  
-    login() {
-      this.app.authenticate(this.credentials, () => {
-          this.router.navigateByUrl('/savetravel');
-      });
-      return false;
-    }
-  
   }
 
+  onSubmit(): void {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
 
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+}

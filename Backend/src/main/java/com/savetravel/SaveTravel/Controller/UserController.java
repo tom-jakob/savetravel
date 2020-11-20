@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.savetravel.SaveTravel.Repositories.UserRepository;
-import com.savetravel.SaveTravel.User.User;
+import com.savetravel.SaveTravel.Models.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
